@@ -1,3 +1,8 @@
+//! HTTP‑клиент для общения с backend‑API.
+//!
+//! Реализация следует принципу "инфраструктура как адаптер": она реализует
+//! интерфейсы из слоя application, но не влияет на доменные модели.
+//! Здесь же находится преобразование JSON в структуры домена.
 use async_trait::async_trait;
 use gloo_net::http::Request;
 use serde::{Deserialize, Serialize};
@@ -5,26 +10,34 @@ use serde::{Deserialize, Serialize};
 use crate::application::ports::{ChatGateway, GatewayError, HealthGateway};
 use crate::domain::{ApiBaseUrl, AskResult, HealthStatus, Question};
 
+/// HTTP‑клиент, использующий `gloo-net`.
+///
+/// В реальном проекте здесь могли бы добавиться таймауты, ретраи,
+/// заголовки авторизации и т.п.
 #[derive(Clone, Debug)]
 pub struct ApiClient {
     base_url: ApiBaseUrl,
 }
 
 impl ApiClient {
+    /// Создаёт клиент с заданным базовым URL.
     pub fn new(base_url: ApiBaseUrl) -> Self {
         Self { base_url }
     }
 
+    /// Формирует полный URL эндпоинта.
     fn endpoint(&self, path: &str) -> String {
         self.base_url.join(path)
     }
 }
 
+/// DTO запроса к `POST /ask`.
 #[derive(Debug, Serialize)]
 struct AskRequestDto {
     question: String,
 }
 
+/// DTO ответа от `POST /ask`.
 #[derive(Debug, Deserialize)]
 struct AskResponseDto {
     answer: String,
@@ -32,6 +45,7 @@ struct AskResponseDto {
     system_prompt_applied: bool,
 }
 
+/// DTO ответа от `GET /health`.
 #[derive(Debug, Deserialize)]
 struct HealthResponseDto {
     status: String,
@@ -39,6 +53,7 @@ struct HealthResponseDto {
     gigachat_enabled: bool,
 }
 
+/// DTO ошибки API (если сервер вернул JSON с полем `error`).
 #[derive(Debug, Deserialize)]
 struct ErrorResponseDto {
     error: String,

@@ -1,3 +1,14 @@
+//! UI‑слой приложения на Yew.
+//!
+//! В этом модуле собраны:
+//! - состояние экрана (поле вопроса, результат запроса, состояние здоровья API);
+//! - обработчики пользовательских действий (ввод, отправка, сохранение URL);
+//! - визуальные компоненты (через `html!`).
+//!
+//! В учебных целях код оставлен линейным и читаемым. Он показывает:
+//! - как разделять состояние на несколько частей;
+//! - как вызывать асинхронные use‑cases через `spawn_local`;
+//! - как отображать состояния **loading / error / ready**.
 use std::rc::Rc;
 
 use js_sys::Date;
@@ -10,6 +21,10 @@ use crate::config::AppConfig;
 use crate::domain::HealthStatus;
 use crate::infrastructure::ApiClient;
 
+/// Общее состояние загрузки для любого блока UI.
+///
+/// Используется для того, чтобы явно показывать три ключевые фазы:
+/// 1) ожидание, 2) успех, 3) ошибка.
 #[derive(Clone, Debug, PartialEq)]
 enum LoadState<T> {
     Idle,
@@ -24,6 +39,10 @@ impl<T> LoadState<T> {
     }
 }
 
+/// Состояние блока "Статус API".
+///
+/// Дополнительно хранит время последней проверки, чтобы пользователь видел,
+/// когда именно было получено значение.
 #[derive(Clone, Debug, PartialEq)]
 struct HealthViewState {
     state: LoadState<HealthStatus>,
@@ -39,6 +58,16 @@ impl HealthViewState {
     }
 }
 
+/// Главный компонент приложения.
+///
+/// Он управляет всеми сценариями UI:
+/// - ввод и отправка вопроса;
+/// - отображение ответа;
+/// - настройка базового URL API;
+/// - проверка состояния backend‑сервера.
+///
+/// Компонент использует use‑cases из слоя `application`, поэтому UI не знает
+/// деталей сетевого обмена.
 #[function_component(App)]
 pub fn app() -> Html {
     let config = AppConfig::load();
@@ -370,18 +399,24 @@ pub fn app() -> Html {
     }
 }
 
+/// Форматирование ошибок use‑case в строку для UI.
 fn error_message(error: UseCaseError) -> String {
     error.to_string()
 }
 
+/// Преобразование булевого значения в русскую метку для интерфейса.
 fn yes_no(value: bool) -> &'static str {
     if value { "да" } else { "нет" }
 }
 
+/// Текстовое пояснение текущего режима сервера.
 fn mode_label(gigachat_enabled: bool) -> &'static str {
     if gigachat_enabled { "GigaChat" } else { "mock" }
 }
 
+/// CSS‑класс для статуса API.
+///
+/// В учебном варианте логика минимальна: "ok" — зелёная метка, иначе предупреждение.
 fn status_class(status: &str) -> &'static str {
     if status.eq_ignore_ascii_case("ok") {
         "pill pill--success"
@@ -390,6 +425,7 @@ fn status_class(status: &str) -> &'static str {
     }
 }
 
+/// Человекочитаемая метка текущего времени для UI.
 fn now_label() -> String {
     Date::new_0().to_string().into()
 }

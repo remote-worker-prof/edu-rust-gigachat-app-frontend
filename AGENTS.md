@@ -71,8 +71,10 @@ git config merge.beads.driver true
 2. **Перед изменениями:** перевести задачу в `in_progress`.
 3. **Только после этого:** выполнять правки, тесты и исправления.
 4. **Подготовить индекс:** добавить изменения в индекс (`git add -A`).
-5. **Коммит проекта:** сообщение коммита должно начинаться с заголовка issue,
-   а тело коммита должно совпадать с `--description`. После описания
+5. **Коммит проекта:** первая строка коммита должна начинаться с ID issue
+   и содержать тип и приоритет в современном формате:
+   `<issue-id> <type>(P#): <issue title>`.
+   Тело коммита должно совпадать с `--description`. После описания
    добавьте список изменённых файлов (см. шаблон ниже).
 6. **Закрытие задачи:** `bd close <id>` выполняется после коммита проекта.
 7. **Синхронизация beads:** `bd sync` выполняется после `bd close`.
@@ -86,16 +88,24 @@ git config merge.beads.driver true
 
 **Шаблон коммита (issue → commit):**
 ```bash
+ID="<issue id>"
+TYPE="<issue type>"
+PRIO="<issue priority>"
 TITLE="<issue title>"
 DESC="<issue description>"
+HEADER="$ID $TYPE($PRIO): $TITLE"
 FILES=$(git diff --cached --name-only | sed 's/^/- /')
-printf "%s\n\n%s\n\nИзменения:\n%s\n" "$TITLE" "$DESC" "$FILES" | git commit -F -
+printf "%s\n\n%s\n\nИзменения:\n%s\n" "$HEADER" "$DESC" "$FILES" | git commit -F -
 ```
 
 Вариант со статусами файлов (A/M/D/R/C + пояснение):
 ```bash
+ID="<issue id>"
+TYPE="<issue type>"
+PRIO="<issue priority>"
 TITLE="<issue title>"
 DESC="<issue description>"
+HEADER="$ID $TYPE($PRIO): $TITLE"
 FILES=$(git diff --cached --name-status | awk '
   {
     code=$1; from=$2; to=$3;
@@ -106,7 +116,7 @@ FILES=$(git diff --cached --name-status | awk '
     else if (code ~ /^C/) { status="скопирован"; printf "- %s %s -> %s (%s)\n", code, from, to, status; next }
     printf "- %s %s (%s)\n", code, from, status;
   }')
-printf "%s\n\n%s\n\nИзменения:\n%s\n" "$TITLE" "$DESC" "$FILES" | git commit -F -
+printf "%s\n\n%s\n\nИзменения:\n%s\n" "$HEADER" "$DESC" "$FILES" | git commit -F -
 ```
 
 Если `.beads/issues.jsonl` попал в индекс, его можно исключить из проектного

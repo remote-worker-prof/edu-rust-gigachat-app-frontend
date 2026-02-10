@@ -115,22 +115,30 @@ rm -rf .beads && bd init
 ## 6.1. Правила сообщения коммита (issue → commit)
 
 Требование:
-- первая строка коммита **совпадает с заголовком issue**;
+- первая строка в формате **`<issue-id> <type>(P#): <issue title>`**;
 - тело коммита **совпадает с `--description`**;
 - после описания идёт **список изменённых файлов**.
 
 Шаблон:
 ```bash
+ID="<issue id>"
+TYPE="<issue type>"
+PRIO="<issue priority>"
 TITLE="<issue title>"
 DESC="<issue description>"
+HEADER="$ID $TYPE($PRIO): $TITLE"
 FILES=$(git diff --cached --name-only | sed 's/^/- /')
-printf "%s\n\n%s\n\nИзменения:\n%s\n" "$TITLE" "$DESC" "$FILES" | git commit -F -
+printf "%s\n\n%s\n\nИзменения:\n%s\n" "$HEADER" "$DESC" "$FILES" | git commit -F -
 ```
 
 Вариант со статусами файлов (A/M/D/R/C + пояснение):
 ```bash
+ID="<issue id>"
+TYPE="<issue type>"
+PRIO="<issue priority>"
 TITLE="<issue title>"
 DESC="<issue description>"
+HEADER="$ID $TYPE($PRIO): $TITLE"
 FILES=$(git diff --cached --name-status | awk '
   {
     code=$1; from=$2; to=$3;
@@ -141,7 +149,7 @@ FILES=$(git diff --cached --name-status | awk '
     else if (code ~ /^C/) { status="скопирован"; printf "- %s %s -> %s (%s)\n", code, from, to, status; next }
     printf "- %s %s (%s)\n", code, from, status;
   }')
-printf "%s\n\n%s\n\nИзменения:\n%s\n" "$TITLE" "$DESC" "$FILES" | git commit -F -
+printf "%s\n\n%s\n\nИзменения:\n%s\n" "$HEADER" "$DESC" "$FILES" | git commit -F -
 ```
 
 ## 7. Памятка: как писать описание задачи

@@ -1,0 +1,23 @@
+[package]
+name = "rust-gigachat-webapp"
+version = "0.1.0"
+edition = "2021"
+authors = ["Dmitry Vlasov <dmitry.v.vlasov@gmail.com>"]
+description = "Учебное Rust Web UI приложение для работы с rust-gigachat-app API"
+license = "MIT"
+
+[dependencies]
+async-trait = "0.1"
+gloo-net = "0.5"
+gloo-storage = "0.3"
+js-sys = "0.3"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "1.0"
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+web-sys = { version = "0.3", features = ["Document", "Element", "HtmlInputElement", "HtmlTextAreaElement", "Window"] }
+yew = { version = "0.22", features = ["csr"] }
+
+[dev-dependencies]
+futures = "0.3"

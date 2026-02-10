@@ -2,7 +2,7 @@ id: agents-issue-workflow
 version: "1.0"
 specVersion: "0.8"
 name: "Agent Issues + Git + Beads Workflow"
-description: "Strict order for issues, work, commit, and sync (bd sync commits .beads/issues.jsonl)"
+description: "Strict order for issues, work, stage, commit, and sync (commit subject=issue title, body=issue description, file list appended)"
 start: createIssue
 states:
   - name: createIssue
@@ -33,14 +33,22 @@ states:
       - name: fix
         functionRef:
           refName: applyFixes
-    transition: commitProjectChanges
+    transition: stageChanges
 
-  - name: commitProjectChanges
+  - name: stageChanges
     type: operation
     actions:
-      - name: gitCommitProject
+      - name: gitAdd
         functionRef:
-          refName: gitCommitProject
+          refName: gitAdd
+    transition: commitChanges
+
+  - name: commitChanges
+    type: operation
+    actions:
+      - name: gitCommit
+        functionRef:
+          refName: gitCommit
     transition: closeIssue
 
   - name: closeIssue
@@ -70,8 +78,10 @@ functions:
     operation: "shell:run tests"
   - name: applyFixes
     operation: "shell:apply fixes"
-  - name: gitCommitProject
-    operation: "shell:git add -A && git commit -m <message>"
+  - name: gitAdd
+    operation: "shell:git add -A"
+  - name: gitCommit
+    operation: "shell:TITLE=<issue_title>; DESC=<issue_description>; FILES=$(git diff --cached --name-only | sed 's/^/- /'); printf \"%s\\n\\n%s\\n\\nИзменения:\\n%s\\n\" \"$TITLE\" \"$DESC\" \"$FILES\" | git commit -F -"
   - name: bdClose
     operation: "shell:bd close <id>"
   - name: bdSync

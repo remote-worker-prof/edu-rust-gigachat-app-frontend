@@ -104,8 +104,13 @@ git config merge.beads.driver true
 
 Задачи создаются с кратким описанием (`--description`), а синхронизация с git
 обычно выполняется автоматически через хуки. При сбоях используйте `bd sync`.
-`bd sync` сам делает commit и push для `.beads/issues.jsonl`, поэтому отдельный
-`git commit`/`git push` этих изменений не требуется.
+`bd sync` сам делает commit и push для `.beads/issues.jsonl`, но коммит
+изменений проекта выполняется вручную.
+
+Требование к сообщению коммита (после `git add -A`):
+- первая строка совпадает с заголовком issue;
+- тело коммита совпадает с `--description`;
+- после описания добавляется список изменённых файлов.
 
 Подробности: `lab_materials/beads_guide.md`, `lab_materials/git_version_control.md`,
 `lab_materials/git_github_setup.md`.

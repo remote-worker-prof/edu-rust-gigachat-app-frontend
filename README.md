@@ -111,7 +111,7 @@ git config merge.beads.driver true
 Требование к сообщению коммита (после `git add -A`):
 - первая строка совпадает с заголовком issue;
 - тело коммита совпадает с `--description`;
-- после описания добавляется список изменённых файлов.
+- после описания добавляется список изменённых файлов со статусами (A/M/D/R/C).
 
 Подробности: `lab_materials/beads_guide.md`, `lab_materials/git_version_control.md`,
 `lab_materials/git_github_setup.md`.

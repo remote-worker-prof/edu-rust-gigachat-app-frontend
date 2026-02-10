@@ -92,6 +92,23 @@ FILES=$(git diff --cached --name-only | sed 's/^/- /')
 printf "%s\n\n%s\n\nИзменения:\n%s\n" "$TITLE" "$DESC" "$FILES" | git commit -F -
 ```
 
+Вариант со статусами файлов (A/M/D/R/C + пояснение):
+```bash
+TITLE="<issue title>"
+DESC="<issue description>"
+FILES=$(git diff --cached --name-status | awk '
+  {
+    code=$1; from=$2; to=$3;
+    status="изменён";
+    if (code ~ /^A/) status="создан";
+    else if (code ~ /^D/) status="удалён";
+    else if (code ~ /^R/) { status="переименован"; printf "- %s %s -> %s (%s)\n", code, from, to, status; next }
+    else if (code ~ /^C/) { status="скопирован"; printf "- %s %s -> %s (%s)\n", code, from, to, status; next }
+    printf "- %s %s (%s)\n", code, from, status;
+  }')
+printf "%s\n\n%s\n\nИзменения:\n%s\n" "$TITLE" "$DESC" "$FILES" | git commit -F -
+```
+
 Если `.beads/issues.jsonl` попал в индекс, его можно исключить из проектного
 коммита и оставить для `bd sync`:
 ```bash

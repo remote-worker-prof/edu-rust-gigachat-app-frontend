@@ -84,7 +84,7 @@ git config merge.beads.driver true
 
 **Формальное описание процесса (CNCF):**
 - `docs/issue_workflow.cncf.yaml` — Serverless Workflow (CNCF) для порядка действий.
-- `agents-issue-workflow.json` — JSON Schema с правилами и ограничениями.
+- `agents-issue-workflow.yaml` — Serverless Workflow (CNCF) для агентских правил.
 
 **Запрещено:**
 - начинать работу без `bd create`;

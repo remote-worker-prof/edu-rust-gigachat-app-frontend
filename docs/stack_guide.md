@@ -226,7 +226,7 @@ ECMAScript и доступны везде.
 В репозитории зафиксирован формальный порядок работы с задачами и git:
 
 - `docs/issue_workflow.cncf.yaml` — CNCF Serverless Workflow с шагами процесса.
-- `agents-issue-workflow.json` — JSON Schema с правилами и запретами.
+- `agents-issue-workflow.yaml` — CNCF Serverless Workflow для агентских правил.
 
 Документы полезны для контроля дисциплины работы, но не обязательны для
 выполнения лабораторных заданий.

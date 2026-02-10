@@ -113,6 +113,13 @@ git config merge.beads.driver true
 - тело коммита совпадает с `--description`;
 - после описания добавляется список изменённых файлов со статусами (A/M/D/R/C).
 
+Памятка статусов (общепринятая git-нотация):
+- A — файл создан (Added)
+- M — файл изменён (Modified)
+- D — файл удалён (Deleted)
+- R — файл переименован (Renamed)
+- C — файл скопирован (Copied)
+
 Подробности: `lab_materials/beads_guide.md`, `lab_materials/git_version_control.md`,
 `lab_materials/git_github_setup.md`.
 

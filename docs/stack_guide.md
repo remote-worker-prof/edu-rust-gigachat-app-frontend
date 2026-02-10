@@ -228,7 +228,7 @@ ECMAScript и доступны везде.
 - `agents-issue-workflow.cncf.yaml` — CNCF Serverless Workflow для агентских правил.
 
 Правила для коммитов:
-- первая строка в формате `<issue-id> <type>(P#): <issue title>`;
+- первая строка в формате `[<issue-id>] <type>(P#): <issue title>`;
 - тело коммита совпадает с описанием issue;
 - после описания добавляется список изменённых файлов.
 

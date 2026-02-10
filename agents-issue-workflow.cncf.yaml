@@ -2,7 +2,7 @@ id: agents-issue-workflow
 version: "1.0"
 specVersion: "0.8"
 name: "Agent Issues + Git + Beads Workflow"
-description: "Strict order for issues, work, stage, commit, and sync (commit header: <id> <type>(P#): <title>; body: description; file list appended)"
+description: "Strict order for issues, work, stage, commit, and sync (commit header: [<id>] <type>(P#): <title>; body: description; file list appended)"
 start: createIssue
 states:
   - name: createIssue
@@ -81,7 +81,7 @@ functions:
   - name: gitAdd
     operation: "shell:git add -A"
   - name: gitCommit
-    operation: "shell:ID=<issue_id>; TYPE=<issue_type>; PRIO=<issue_priority>; TITLE=<issue_title>; DESC=<issue_description>; HEADER=\"$ID $TYPE($PRIO): $TITLE\"; FILES=$(git diff --cached --name-status | awk '{code=$1; from=$2; to=$3; status=\"изменён\"; if (code ~ /^A/) status=\"создан\"; else if (code ~ /^D/) status=\"удалён\"; else if (code ~ /^R/) { status=\"переименован\"; printf \"- %s %s -> %s (%s)\\n\", code, from, to, status; next } else if (code ~ /^C/) { status=\"скопирован\"; printf \"- %s %s -> %s (%s)\\n\", code, from, to, status; next } printf \"- %s %s (%s)\\n\", code, from, status }'); printf \"%s\\n\\n%s\\n\\nИзменения:\\n%s\\n\" \"$HEADER\" \"$DESC\" \"$FILES\" | git commit -F -"
+    operation: "shell:ID=<issue_id>; TYPE=<issue_type>; PRIO=<issue_priority>; TITLE=<issue_title>; DESC=<issue_description>; HEADER=\"[$ID] $TYPE($PRIO): $TITLE\"; FILES=$(git diff --cached --name-status | awk '{code=$1; from=$2; to=$3; status=\"изменён\"; if (code ~ /^A/) status=\"создан\"; else if (code ~ /^D/) status=\"удалён\"; else if (code ~ /^R/) { status=\"переименован\"; printf \"- %s %s -> %s (%s)\\n\", code, from, to, status; next } else if (code ~ /^C/) { status=\"скопирован\"; printf \"- %s %s -> %s (%s)\\n\", code, from, to, status; next } printf \"- %s %s (%s)\\n\", code, from, status }'); printf \"%s\\n\\n%s\\n\\nИзменения:\\n%s\\n\" \"$HEADER\" \"$DESC\" \"$FILES\" | git commit -F -"
   - name: bdClose
     operation: "shell:bd close <id>"
   - name: bdSync

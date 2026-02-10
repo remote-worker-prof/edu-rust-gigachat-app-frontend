@@ -115,7 +115,7 @@ rm -rf .beads && bd init
 ## 6.1. Правила сообщения коммита (issue → commit)
 
 Требование:
-- первая строка в формате **`<issue-id> <type>(P#): <issue title>`**;
+- первая строка в формате **`[<issue-id>] <type>(P#): <issue title>`**;
 - тело коммита **совпадает с `--description`**;
 - после описания идёт **список изменённых файлов**.
 
@@ -133,7 +133,7 @@ TYPE="<issue type>"
 PRIO="<issue priority>"
 TITLE="<issue title>"
 DESC="<issue description>"
-HEADER="$ID $TYPE($PRIO): $TITLE"
+HEADER="[$ID] $TYPE($PRIO): $TITLE"
 FILES=$(git diff --cached --name-only | sed 's/^/- /')
 printf "%s\n\n%s\n\nИзменения:\n%s\n" "$HEADER" "$DESC" "$FILES" | git commit -F -
 ```
@@ -145,7 +145,7 @@ TYPE="<issue type>"
 PRIO="<issue priority>"
 TITLE="<issue title>"
 DESC="<issue description>"
-HEADER="$ID $TYPE($PRIO): $TITLE"
+HEADER="[$ID] $TYPE($PRIO): $TITLE"
 FILES=$(git diff --cached --name-status | awk '
   {
     code=$1; from=$2; to=$3;

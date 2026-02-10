@@ -36,3 +36,25 @@
 - базовые UI-тесты,
 - проверку корректности запросов к API,
 - обработку сетевых ошибок.
+
+## Beads + Git Workflow
+
+Проект использует **beads** как встроенный issue‑трекер.
+
+Рекомендуемый режим (по документации beads):
+- авто‑синхронизация + git‑хуки + merge‑driver для `.beads/issues.jsonl`.
+
+Если это свежий клон:
+```bash
+bd init
+bd hooks install
+git config merge.beads.driver true
+```
+
+Используйте `bd sync` только как fallback, если auto‑sync/хуки не сработали.
+
+Полезные команды:
+- `bd ready` — найти доступную работу
+- `bd create "Заголовок" --type task --priority 2 --description "что и зачем"` — создать задачу
+- `bd update <id> --status in_progress` — взять задачу
+- `bd close <id>` — закрыть задачу

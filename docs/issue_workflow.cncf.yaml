@@ -1,0 +1,78 @@
+id: issues-workflow
+version: "1.0"
+specVersion: "0.8"
+name: "Issues + Git + Beads Workflow"
+description: "Strict order for issues, work, commit, and sync"
+start: createIssue
+states:
+  - name: createIssue
+    type: operation
+    actions:
+      - name: bdCreate
+        functionRef:
+          refName: bdCreate
+    transition: markInProgress
+
+  - name: markInProgress
+    type: operation
+    actions:
+      - name: bdInProgress
+        functionRef:
+          refName: bdUpdateInProgress
+    transition: doWork
+
+  - name: doWork
+    type: operation
+    actions:
+      - name: implement
+        functionRef:
+          refName: workImplementation
+      - name: test
+        functionRef:
+          refName: runTests
+      - name: fix
+        functionRef:
+          refName: applyFixes
+    transition: commitChanges
+
+  - name: commitChanges
+    type: operation
+    actions:
+      - name: gitCommit
+        functionRef:
+          refName: gitCommit
+    transition: closeIssue
+
+  - name: closeIssue
+    type: operation
+    actions:
+      - name: bdClose
+        functionRef:
+          refName: bdClose
+    transition: syncBeads
+
+  - name: syncBeads
+    type: operation
+    actions:
+      - name: bdSync
+        functionRef:
+          refName: bdSync
+    end: true
+
+functions:
+  - name: bdCreate
+    operation: "shell:bd create <title> --type task --priority 2 --description <why>"
+  - name: bdUpdateInProgress
+    operation: "shell:bd update <id> --status in_progress"
+  - name: workImplementation
+    operation: "shell:perform implementation"
+  - name: runTests
+    operation: "shell:run tests"
+  - name: applyFixes
+    operation: "shell:apply fixes"
+  - name: gitCommit
+    operation: "shell:git add -A && git commit -m <message>"
+  - name: bdClose
+    operation: "shell:bd close <id>"
+  - name: bdSync
+    operation: "shell:bd sync"

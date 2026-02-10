@@ -82,6 +82,10 @@ git config merge.beads.driver true
 он может запускать повторную синхронизацию. Это ожидаемое поведение,
 и ручной `git push` после него не требуется.
 
+**Формальное описание процесса (CNCF):**
+- `docs/issue_workflow.cncf.yaml` — Serverless Workflow (CNCF) для порядка действий.
+- `agents-issue-workflow.json` — JSON Schema с правилами и ограничениями.
+
 **Запрещено:**
 - начинать работу без `bd create`;
 - закрывать задачу до коммита и push;

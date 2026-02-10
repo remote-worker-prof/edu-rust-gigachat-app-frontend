@@ -40,11 +40,12 @@
 
 ```bash
 # backend (в отдельном терминале)
-cd /home/sorcerer/Projects/rust-gigachat-app
+# замените /path/to на путь к вашему проекту
+cd /path/to/rust-gigachat-app
 cargo run
 
 # frontend
-cd /home/sorcerer/Projects/rust-gigachat-webapp
+cd /path/to/rust-gigachat-webapp
 trunk serve --open
 ```
 

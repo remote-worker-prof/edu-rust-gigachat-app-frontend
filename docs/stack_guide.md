@@ -178,10 +178,34 @@ ECMAScript и доступны везде.
 **Практика:** использовать `thiserror` проще и читабельнее, чем писать
 реализацию ошибок вручную.
 
-## 10. Дополнительное чтение (лучшие статьи)
+## 10. Источники и дополнительное чтение
 
-Для понимания WebAssembly рекомендуется статья MDN, где объясняются цели,
-принципы работы и связь с JavaScript.
+Ниже приведены официальные источники, на которые опирается этот гайд.
+Их полезно использовать как базовую точку отсчёта и для проверки деталей.
+
+### 10.1. Официальные документации (основные)
+
+- Rust (The Rust Programming Language): https://doc.rust-lang.org/book/
+- Cargo (The Cargo Book): https://doc.rust-lang.org/cargo/
+- Yew (официальный учебный раздел): https://yew.rs/docs/next/tutorial/
+- Yew (API и примеры): https://docs.rs/crate/yew/latest
+- Yew 0.22 (официальные заметки о релизе): https://yew.rs/blog/2024-11-22-yew-0-22/
+- Trunk: https://trunkrs.dev/guide/getting-started/pre-reqs/
+- wasm-bindgen (guide): https://rustwasm.github.io/docs/wasm-bindgen/
+- wasm-bindgen-futures (API): https://wasm-bindgen.github.io/wasm-bindgen/api/wasm_bindgen_futures/
+- web-sys (API): https://docs.rs/web-sys
+- js-sys (API): https://docs.rs/crate/js-sys/0.3.21
+- gloo (официальный сайт и обзор модулей): https://gloo-rs.web.app/
+- gloo-net (API): https://docs.rs/gloo-net
+- gloo-storage (API): https://docs.rs/gloo-storage
+- Serde (официальный сайт): https://serde.rs/
+- serde_json (API): https://docs.rs/serde_json
+- async-trait (API): https://docs.rs/async-trait
+- thiserror (API): https://docs.rs/thiserror
+
+### 10.2. Обзорные статьи и учебные материалы высокого качества
+
+- WebAssembly Concepts (MDN): https://developer.mozilla.org/en-US/docs/WebAssembly/Concepts
 
 ## 11. Как связаны все части стека
 

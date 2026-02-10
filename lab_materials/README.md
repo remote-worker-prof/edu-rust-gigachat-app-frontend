@@ -7,12 +7,13 @@
 ## Содержание
 
 1. **lab_work.md** — текст лабораторной работы с целями, теорией и шагами.
-2. **group_work_guide.md** — методические указания по групповой работе.
-3. **library_reference.md** — справочные материалы по библиотекам UI‑проекта.
-4. **resources_collection.md** — подборка ссылок на официальные источники.
-5. **git_github_setup.md** — практикум по SSH‑ключам и подключению к GitHub.
-6. **git_version_control.md** — практикум по базовым операциям Git.
-7. **beads_guide.md** — практикум по issue‑трекеру beads и workflow с Git.
+2. **lab_02_web_interface_introduction.md** — вводный материал для Moodle.
+3. **group_work_guide.md** — методические указания по групповой работе.
+4. **library_reference.md** — справочные материалы по библиотекам UI‑проекта.
+5. **resources_collection.md** — подборка ссылок на официальные источники.
+6. **git_github_setup.md** — практикум по SSH‑ключам и подключению к GitHub.
+7. **git_version_control.md** — практикум по базовым операциям Git.
+8. **beads_guide.md** — практикум по issue‑трекеру beads и workflow с Git.
 
 ## Для преподавателя
 

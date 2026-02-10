@@ -2,7 +2,7 @@ id: agents-issue-workflow
 version: "1.0"
 specVersion: "0.8"
 name: "Agent Issues + Git + Beads Workflow"
-description: "Strict order for issues, work, stage, commit, and sync (commit subject=issue title, body=issue description, file list appended)"
+description: "Strict order for issues, work, stage, commit, and sync (project commit uses issue title/body; bd sync commits only .beads/issues.jsonl)"
 start: createIssue
 states:
   - name: createIssue

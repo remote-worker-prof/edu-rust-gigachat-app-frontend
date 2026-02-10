@@ -77,8 +77,9 @@ git config merge.beads.driver true
 6. **Закрытие задачи:** `bd close <id>` выполняется после коммита проекта.
 7. **Синхронизация beads:** `bd sync` выполняется после `bd close`.
 
-**Важно:** `bd sync` сам делает commit и push для `.beads/issues.jsonl`.
-Коммит проекта нужно делать вручную. `bd sync` не выполняет
+**Важно:** `bd sync` коммитит **только** `.beads/issues.jsonl`
+(данные beads). Изменения проекта он **не коммитит**.
+Коммит проекта выполняется вручную. `bd sync` не выполняет
 `git add`, поэтому новые файлы нужно добавить в индекс заранее.
 Повторный push допускается только если `bd sync` не выполнялся
 или завершился с ошибкой.
@@ -89,6 +90,12 @@ TITLE="<issue title>"
 DESC="<issue description>"
 FILES=$(git diff --cached --name-only | sed 's/^/- /')
 printf "%s\n\n%s\n\nИзменения:\n%s\n" "$TITLE" "$DESC" "$FILES" | git commit -F -
+```
+
+Если `.beads/issues.jsonl` попал в индекс, его можно исключить из проектного
+коммита и оставить для `bd sync`:
+```bash
+git restore --staged .beads/issues.jsonl
 ```
 
 **Примечание про хуки:** если `bd sync` вызывается внутри git‑хуков,

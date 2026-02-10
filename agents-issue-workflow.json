@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/agents-issue-workflow.schema.json",
+  "title": "Agents Issue Workflow",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "purpose",
+    "strict",
+    "scope",
+    "required_before_work",
+    "work_phase",
+    "git_phase",
+    "closing_phase",
+    "rules",
+    "notes"
+  ],
+  "properties": {
+    "purpose": {
+      "type": "string",
+      "minLength": 1
+    },
+    "strict": {
+      "type": "boolean"
+    },
+    "scope": {
+      "type": "string",
+      "enum": ["repo", "project", "global"]
+    },
+    "required_before_work": {
+      "type": "array",
+      "minItems": 2,
+      "items": {"$ref": "#/definitions/preWorkStep"}
+    },
+    "work_phase": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": ["implementation", "tests", "fixes"]
+      }
+    },
+    "git_phase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["require_hooks", "actions"],
+      "properties": {
+        "require_hooks": {"type": "boolean"},
+        "actions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": ["git add", "git commit"]
+          }
+        }
+      }
+    },
+    "closing_phase": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/definitions/closingStep"}
+    },
+    "rules": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "forbidden",
+        "no_manual_push_after_bd_sync",
+        "manual_push_allowed_only_if_bd_sync_failed"
+      ],
+      "properties": {
+        "forbidden": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string"}
+        },
+        "no_manual_push_after_bd_sync": {"type": "boolean"},
+        "manual_push_allowed_only_if_bd_sync_failed": {"type": "boolean"}
+      }
+    },
+    "notes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hooks", "default_behavior"],
+      "properties": {
+        "hooks": {"type": "string"},
+        "default_behavior": {"type": "string"}
+      }
+    }
+  },
+  "definitions": {
+    "preWorkStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action"],
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": ["bd create", "bd update"]
+        },
+        "status": {
+          "type": "string",
+          "enum": ["in_progress"]
+        },
+        "notes": {"type": "string"}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {"action": {"const": "bd update"}},
+            "required": ["action"]
+          },
+          "then": {"required": ["status"]}
+        }
+      ]
+    },
+    "closingStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action"],
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": ["bd close", "bd sync"]
+        },
+        "notes": {"type": "string"}
+      }
+    }
+  },
+  "examples": [
+    {
+      "purpose": "Agent reminder for strict issues+git workflow",
+      "strict": true,
+      "scope": "repo",
+      "required_before_work": [
+        {
+          "action": "bd create",
+          "notes": "Create issue before any work with --description"
+        },
+        {
+          "action": "bd update",
+          "status": "in_progress",
+          "notes": "Mark issue in progress before changes"
+        }
+      ],
+      "work_phase": ["implementation", "tests", "fixes"],
+      "git_phase": {
+        "require_hooks": true,
+        "actions": ["git add", "git commit"]
+      },
+      "closing_phase": [
+        {
+          "action": "bd close",
+          "notes": "Close only after commit and successful sync"
+        },
+        {
+          "action": "bd sync",
+          "notes": "bd sync performs commit and push for issues JSONL"
+        }
+      ],
+      "rules": {
+        "forbidden": [
+          "start work before bd create",
+          "close issue before commit",
+          "work without in_progress"
+        ],
+        "no_manual_push_after_bd_sync": true,
+        "manual_push_allowed_only_if_bd_sync_failed": true
+      },
+      "notes": {
+        "hooks": "bd sync may be triggered by git hooks; avoid extra git push afterward",
+        "default_behavior": "After bd sync, verify git status; push only if needed"
+      }
+    }
+  ]
+}

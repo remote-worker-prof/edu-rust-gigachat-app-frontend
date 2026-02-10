@@ -93,7 +93,7 @@ cargo install trunk
 3. Запустить backend (в отдельном терминале):
 
 ```bash
-cd /path/to/rust-gigachat-app
+cd /path/to/edu-rust-gigachat-app-backend
 cargo run
 ```
 
@@ -102,7 +102,7 @@ cargo run
 ### Шаг 1. Запуск UI
 
 ```bash
-cd /path/to/rust-gigachat-webapp
+cd /path/to/edu-rust-gigachat-app-frontend
 NO_COLOR=true trunk serve --address 127.0.0.1 --port 8080
 ```
 

@@ -1,4 +1,4 @@
-//! Учебный UI‑клиент к API `rust-gigachat-app`.
+//! Учебный UI‑клиент к API `edu-rust-gigachat-app-backend`.
 //!
 //! Этот crate собирается в WebAssembly и запускается в браузере. Он демонстрирует
 //! разделение по слоям в духе DDD:

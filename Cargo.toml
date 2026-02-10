@@ -1,9 +1,9 @@
 [package]
-name = "rust-gigachat-webapp"
+name = "edu-rust-gigachat-app-frontend"
 version = "0.1.0"
 edition = "2021"
 authors = ["Dmitry Vlasov <dmitry.v.vlasov@gmail.com>"]
-description = "Учебное Rust Web UI приложение для работы с rust-gigachat-app API"
+description = "Учебное Rust Web UI приложение для работы с edu-rust-gigachat-app-backend API"
 license = "MIT"
 
 [dependencies]

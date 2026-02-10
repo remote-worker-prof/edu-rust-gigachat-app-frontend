@@ -1,9 +1,9 @@
-# Agent Instructions for rust-gigachat-webapp
+# Agent Instructions for edu-rust-gigachat-app-frontend
 
 ## Project Overview
 
 Учебное веб-приложение с UI/UX на Rust, использующее API проекта
-`rust-gigachat-app`. Это отдельный проект, предназначенный для студентов.
+`edu-rust-gigachat-app-backend`. Это отдельный проект, предназначенный для студентов.
 
 ## Key Constraints
 

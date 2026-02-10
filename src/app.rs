@@ -253,7 +253,7 @@ pub fn app() -> Html {
                 </div>
                 <p class="app__subtitle">
                     {"Клиент к API "}
-                    <span class="app__mono">{"rust-gigachat-app"}</span>
+                    <span class="app__mono">{"edu-rust-gigachat-app-backend"}</span>
                     {". Используйте два процесса на разных портах."}
                 </p>
             </header>

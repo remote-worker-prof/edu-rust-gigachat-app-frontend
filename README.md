@@ -1,7 +1,7 @@
-# rust-gigachat-webapp
+# edu-rust-gigachat-app-frontend
 
 Учебное веб-приложение (UI/UX) на Rust, использующее API сервиса
-`rust-gigachat-app`. Проект предназначен для студентов 1 курса (2 семестр)
+`edu-rust-gigachat-app-backend`. Проект предназначен для студентов 1 курса (2 семестр)
 в рамках направления ПОО.
 
 Статус: подготовлена базовая структура проекта. Интерфейс собирается и
@@ -23,7 +23,7 @@
 Базовый URL должен быть конфигурируемым (например, через переменную окружения).
 
 **Важно:** UI **не обращается к GigaChat напрямую**. Все запросы идут только к
-backend‑API проекта `rust-gigachat-app`, который запускается отдельным процессом.
+backend‑API проекта `edu-rust-gigachat-app-backend`, который запускается отдельным процессом.
 
 ## Выбранный фреймворк (обоснование)
 
@@ -44,11 +44,11 @@ backend‑API проекта `rust-gigachat-app`, который запуска�
 ```bash
 # backend (в отдельном терминале)
 # замените /path/to на путь к вашему проекту
-cd /path/to/rust-gigachat-app
+cd /path/to/edu-rust-gigachat-app-backend
 cargo run
 
 # frontend
-cd /path/to/rust-gigachat-webapp
+cd /path/to/edu-rust-gigachat-app-frontend
 NO_COLOR=true trunk serve --open
 ```
 
@@ -89,7 +89,7 @@ NO_COLOR=true trunk serve --address 127.0.0.1 --port 8080
 
 - `src/domain` — сущности и value objects (Question, ApiBaseUrl).
 - `src/application` — порты и use-cases (AskQuestion, CheckHealth).
-- `src/infrastructure` — HTTP-клиент к `rust-gigachat-app`.
+- `src/infrastructure` — HTTP-клиент к `edu-rust-gigachat-app-backend`.
 - `src/app.rs` — UI-композиция на Yew.
 
 ## Git и beads (учебный workflow)

@@ -4,7 +4,7 @@
 
 **Тема:** разработка учебного web‑интерфейса на Rust (Yew) и подключение к backend‑API.
 
-Проект: `rust-gigachat-webapp` — клиент к API проекта `rust-gigachat-app`.
+Проект: `edu-rust-gigachat-app-frontend` — клиент к API проекта `edu-rust-gigachat-app-backend`.
 UI и backend запускаются как **два отдельных процесса** на разных портах.
 
 ## 2. Цель

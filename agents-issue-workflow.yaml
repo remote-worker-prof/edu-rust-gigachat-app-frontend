@@ -2,7 +2,7 @@ id: agents-issue-workflow
 version: "1.0"
 specVersion: "0.8"
 name: "Agent Issues + Git + Beads Workflow"
-description: "Strict order for issues, work, commit, and sync"
+description: "Strict order for issues, work, commit, and sync (bd sync commits .beads/issues.jsonl)"
 start: createIssue
 states:
   - name: createIssue
@@ -33,14 +33,14 @@ states:
       - name: fix
         functionRef:
           refName: applyFixes
-    transition: commitChanges
+    transition: commitProjectChanges
 
-  - name: commitChanges
+  - name: commitProjectChanges
     type: operation
     actions:
-      - name: gitCommit
+      - name: gitCommitProject
         functionRef:
-          refName: gitCommit
+          refName: gitCommitProject
     transition: closeIssue
 
   - name: closeIssue
@@ -70,7 +70,7 @@ functions:
     operation: "shell:run tests"
   - name: applyFixes
     operation: "shell:apply fixes"
-  - name: gitCommit
+  - name: gitCommitProject
     operation: "shell:git add -A && git commit -m <message>"
   - name: bdClose
     operation: "shell:bd close <id>"

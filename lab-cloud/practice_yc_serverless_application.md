@@ -1,4 +1,4 @@
-# Практическая работа: развёртывание edu-rust-gigachat-app-frontend как Serverless Application в Yandex Cloud
+# Лабораторная работа №3 (Frontend): развёртывание edu-rust-gigachat-app-frontend в Yandex Cloud
 
 Документ предназначен для самостоятельной практики. Текст ориентирован на
 начинающих студентов и описывает полный путь: подготовка аккаунта, контейнеризация

@@ -71,6 +71,24 @@ IAM‑токен нужен для прямых обращений к API Yandex
 yc config set folder-id <FOLDER_ID>
 ```
 
+## 4.1. Локальная dev‑сборка UI через Trunk (кратко)
+
+Для подготовки статических файлов нужен Trunk и целевая платформа WebAssembly.
+Если они ещё не установлены:
+
+```bash
+rustup target add wasm32-unknown-unknown
+cargo install trunk
+```
+
+Минимальный dev‑запуск:
+
+```bash
+NO_COLOR=true trunk serve --address 127.0.0.1 --port 8080
+```
+
+Подробная учебная инструкция: `docs/build_and_run.md`.
+
 ## 5. Создание Container Registry
 
 Создать реестр:

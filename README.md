@@ -125,6 +125,8 @@ git config merge.beads.driver true
 
 Подробности: `lab/beads_guide.md`, `lab/git_version_control.md`,
 `lab/git_github_setup.md`.
+Отдельная лабораторная работа по облачному развёртыванию (ЛР №3, Frontend):
+`lab-cloud/lab_yc_serverless_application.md`.
 
 ## Безопасность и публикация учебных материалов
 

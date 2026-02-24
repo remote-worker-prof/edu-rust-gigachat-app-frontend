@@ -15,6 +15,9 @@
 7. **git_version_control.md** — практикум по базовым операциям Git.
 8. **beads_guide.md** — практикум по issue‑трекеру beads и workflow с Git.
 
+Дополнительно:
+- `lab-cloud/lab_yc_serverless_application.md` — лабораторная работа №3 (Frontend): развёртывание UI в Yandex Cloud.
+
 ## Для преподавателя
 
 Рекомендуется начинать с файла `lab_work.md`. Он содержит полный сценарий

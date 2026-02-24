@@ -18,6 +18,8 @@ COPY dist/ /usr/share/nginx/html/
 COPY nginx.conf.template /etc/nginx/templates/default.conf.template
 
 # 5. Значение PORT по умолчанию (может быть переопределено в Yandex Cloud).
+#    В Serverless Containers платформа передаёт PORT как переменную окружения.
+#    Если не передали вручную, используем 8080.
 ENV PORT=8080
 
 # 6. При старте контейнера подставляем PORT и запускаем nginx.

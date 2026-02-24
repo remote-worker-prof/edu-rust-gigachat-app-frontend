@@ -117,9 +117,12 @@ yc container registry configure-docker
 
 ### 7.1. Сборка статических файлов
 
+Для Docker‑образа нужен **статический билд**, поэтому используется `trunk build`
+(не `trunk serve`).
+
 ```bash
 cd /ваш/путь/к/edu-rust-gigachat-app-frontend
-trunk build
+NO_COLOR=true trunk build
 ```
 
 После сборки статические файлы появятся в `dist/`.

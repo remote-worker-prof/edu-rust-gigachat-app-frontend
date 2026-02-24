@@ -127,26 +127,54 @@ NO_COLOR=true trunk build
 
 После сборки статические файлы появятся в `dist/`.
 
-### 7.2. Минимальный Dockerfile
+### 7.2. Dockerfile (подробный учебный образец)
 
 Serverless Containers ожидают, что приложение слушает порт из переменной
-окружения `PORT`. Ниже приведён минимальный пример контейнера, который
-раздаёт статические файлы через nginx и использует `PORT`.
+окружения `PORT`. Ниже приведён **полный Dockerfile**, который:
+- использует лёгкий базовый образ `nginx:alpine`;
+- копирует статические файлы из `dist/`;
+- подставляет порт из переменной окружения `PORT`;
+- корректно запускает nginx в foreground‑режиме.
 
 ```Dockerfile
+# 1. Базовый образ: минимальный nginx на Alpine Linux.
 FROM nginx:alpine
 
-# Подставляем порт из переменной окружения PORT
-RUN apk add --no-cache bash
+# 2. Устанавливаем bash и envsubst (часть пакета gettext),
+#    чтобы подставлять значение $PORT в шаблон конфигурации.
+RUN apk add --no-cache bash gettext
 
+# 3. Копируем статические файлы, собранные trunk build.
+#    Это готовый фронтенд (HTML/CSS/JS/WASM).
 COPY dist/ /usr/share/nginx/html/
+
+# 4. Копируем шаблон конфигурации nginx, где порт указан как ${PORT}.
 COPY nginx.conf.template /etc/nginx/templates/default.conf.template
 
-# Nginx сам подставит PORT при запуске через envsubst
+# 5. Значение PORT по умолчанию (может быть переопределено в Yandex Cloud).
 ENV PORT=8080
 
+# 6. При старте контейнера подставляем PORT и запускаем nginx.
+#    Важно: nginx должен работать в foreground‑режиме (daemon off),
+#    иначе контейнер сразу завершится.
 CMD ["/bin/sh", "-c", "envsubst '$$PORT' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
 ```
+
+#### Подробные пояснения к Dockerfile (в текстовом виде)
+
+1. **FROM nginx:alpine** — берём официальный минимальный nginx. Он маленький,
+   быстро скачивается и достаточно для раздачи статических файлов.
+2. **RUN apk add --no-cache bash gettext** — добавляем `bash` и `envsubst`.
+   `envsubst` нужен, чтобы заменить `${PORT}` на фактическое значение.
+3. **COPY dist/** — переносим результат `trunk build` в каталог nginx
+   `/usr/share/nginx/html`. Это стандартное место для статических файлов.
+4. **COPY nginx.conf.template** — кладём шаблон конфигурации nginx, в котором
+   порт задан как переменная `${PORT}`, а не жёстким числом.
+5. **ENV PORT=8080** — значение по умолчанию. В Yandex Cloud эта переменная
+   задаётся автоматически (или вручную в параметрах ревизии).
+6. **CMD ... envsubst ... nginx -g 'daemon off;'** — при старте контейнера
+   подставляем порт и запускаем nginx в foreground‑режиме. Это обязательное
+   требование контейнерной платформы: основной процесс не должен «уходить в фон».
 
 Пример `nginx.conf.template`:
 

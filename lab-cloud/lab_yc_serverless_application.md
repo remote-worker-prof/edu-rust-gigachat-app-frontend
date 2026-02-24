@@ -20,6 +20,27 @@ Containers.
 - Установленный Docker.
 - Доступ к репозиторию `edu-rust-gigachat-app-frontend`.
 
+### 2.1. Установка Docker (по ОС)
+
+Вариант зависит от операционной системы. Используйте официальные инструкции.
+
+**Windows**
+- **Docker Desktop (рекомендуемый вариант для учебной работы).**
+  Официальная инструкция: https://docs.docker.com/desktop/setup/install/windows-install/
+- **Docker Desktop + WSL 2.**
+  Для работы на Windows требуется WSL 2. Установка WSL: https://learn.microsoft.com/en-us/windows/wsl/install
+  Дополнительно: раздел про WSL в Docker Desktop: https://docs.docker.com/desktop/features/wsl/use-wsl/
+
+**macOS**
+- **Docker Desktop for Mac.**
+  Официальная инструкция: https://docs.docker.com/installation/mac/
+
+**Linux**
+- **Docker Desktop for Linux** (если нужен GUI‑инструмент):
+  https://docs.docker.com/desktop/setup/install/linux/
+- **Docker Engine** (классический вариант для Linux):
+  https://docs.docker.com/engine/install/
+
 ## 3. Термины и токены
 
 ### 3.1. OAuth‑токен (долгоживущий)

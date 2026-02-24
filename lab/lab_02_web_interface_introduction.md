@@ -35,9 +35,9 @@ https://github.com/remote-worker-prof/edu-rust-gigachat-app-frontend
 3. `docs/common_issues.md` — частые ошибки (включая CORS).
 4. `docs/yew_ui_guide.md` — основы компонентов и состояния в Yew.
 5. `docs/ui_ux_requirements.md` — требования к интерфейсу.
-6. `lab_materials/lab_work.md` — основной текст лабораторной работы.
-7. `lab_materials/git_github_setup.md` и `lab_materials/git_version_control.md` — базовый workflow Git.
-8. `lab_materials/beads_guide.md` — работа с задачами в beads.
+6. `lab/lab_work.md` — основной текст лабораторной работы.
+7. `lab/git_github_setup.md` и `lab/git_version_control.md` — базовый workflow Git.
+8. `lab/beads_guide.md` — работа с задачами в beads.
 
 ## 6. Минимальные требования к окружению
 
@@ -50,7 +50,7 @@ https://github.com/remote-worker-prof/edu-rust-gigachat-app-frontend
 
 UI работает на одном порту (например, `8080`), а API — на другом (`8000`).
 Это разные **origin**, поэтому браузер может блокировать запросы.
-Решения описаны в `lab_materials/lab_work.md` и `docs/common_issues.md`.
+Решения описаны в `lab/lab_work.md` и `docs/common_issues.md`.
 
 ## 8. Организационные требования
 

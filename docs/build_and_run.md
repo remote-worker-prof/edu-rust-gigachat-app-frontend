@@ -195,4 +195,4 @@ Ctrl + C
 
 Список типовых ошибок и решений расположен в `docs/common_issues.md`.
 Если видите ошибку `Failed to fetch` и сообщение о блокировке CORS,
-смотрите также `lab_materials/lab_work.md`.
+смотрите также `lab/lab_work.md`.

@@ -59,7 +59,7 @@ NO_COLOR=true trunk serve --open
 - в интерфейсе (значение сохраняется в localStorage).
 
 Если запросы блокируются браузером, это может быть CORS. См. `docs/common_issues.md`
-и `lab_materials/lab_work.md`.
+и `lab/lab_work.md`.
 
 ### Сборка и затравочная проверка
 
@@ -78,10 +78,10 @@ NO_COLOR=true trunk serve --address 127.0.0.1 --port 8080
 
 ## Учебные материалы
 
-Полный комплект учебных материалов размещён в `lab_materials/README.md`.
+Полный комплект учебных материалов размещён в `lab/README.md`.
 
 Рекомендуемый минимум:
-- `lab_materials/lab_work.md` — лабораторная работа (теория + шаги);
+- `lab/lab_work.md` — лабораторная работа (теория + шаги);
 - `docs/yew_ui_guide.md` — практический гайд по компонентам Yew;
 - `docs/ui_ux_requirements.md` — требования к интерфейсу.
 
@@ -123,8 +123,8 @@ git config merge.beads.driver true
 - R — файл переименован (Renamed)
 - C — файл скопирован (Copied)
 
-Подробности: `lab_materials/beads_guide.md`, `lab_materials/git_version_control.md`,
-`lab_materials/git_github_setup.md`.
+Подробности: `lab/beads_guide.md`, `lab/git_version_control.md`,
+`lab/git_github_setup.md`.
 
 ## Безопасность и публикация учебных материалов
 

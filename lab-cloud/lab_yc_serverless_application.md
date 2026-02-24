@@ -81,6 +81,12 @@ rustup target add wasm32-unknown-unknown
 cargo install trunk
 ```
 
+**Почему target называется `wasm32-unknown-unknown`:**
+- `wasm32` — архитектура WebAssembly 32‑bit;
+- первое `unknown` — нет конкретной ОС (код исполняется в браузере);
+- второе `unknown` — нет стандартного ABI, взаимодействие идёт через Web API.
+Для Yew + Trunk в браузере используется именно этот target.
+
 Минимальный dev‑запуск:
 
 ```bash

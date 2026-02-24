@@ -171,7 +171,11 @@ CMD ["/bin/sh", "-c", "envsubst '$$PORT' < /etc/nginx/templates/default.conf.tem
 1. **FROM nginx:alpine** — берём официальный минимальный nginx. Он маленький,
    быстро скачивается и достаточно для раздачи статических файлов.
 2. **RUN apk add --no-cache bash gettext** — добавляем `bash` и `envsubst`.
-   `envsubst` нужен, чтобы заменить `${PORT}` на фактическое значение.
+   Пояснение для новичков:
+   - `apk` — менеджер пакетов Alpine Linux (аналог `apt`/`yum`);
+   - `bash` — оболочка, из которой запускаем `envsubst`;
+   - `gettext` — пакет, внутри которого находится утилита `envsubst`;
+   - `envsubst` заменяет `${PORT}` в шаблоне nginx на реальное значение порта.
 3. **COPY dist/** — переносим результат `trunk build` в каталог nginx
    `/usr/share/nginx/html`. Это стандартное место для статических файлов.
 4. **COPY nginx.conf.template** — кладём шаблон конфигурации nginx, в котором

@@ -176,6 +176,10 @@ CMD ["/bin/sh", "-c", "envsubst '$$PORT' < /etc/nginx/templates/default.conf.tem
    подставляем порт и запускаем nginx в foreground‑режиме. Это обязательное
    требование контейнерной платформы: основной процесс не должен «уходить в фон».
 
+**Файлы в репозитории:**
+- `lab-cloud/Dockerfile` — полный учебный Dockerfile из примера выше.
+- `lab-cloud/nginx.conf.template` — шаблон конфигурации nginx.
+
 Пример `nginx.conf.template`:
 
 ```nginx

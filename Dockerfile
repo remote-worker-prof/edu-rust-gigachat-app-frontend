@@ -8,6 +8,8 @@ FROM nginx:alpine
 #    - bash — удобный shell, из которого мы запускаем команду envsubst при старте.
 #    - gettext включает утилиту envsubst, которая подставляет переменные окружения
 #      в текст (в нашем случае ${PORT} внутри шаблона nginx).
+#    - значение PORT приходит из окружения (платформа Serverless Containers)
+#      или берётся из ENV PORT ниже, если его не передали.
 RUN apk add --no-cache bash gettext
 
 # 3. Копируем статические файлы, собранные trunk build.

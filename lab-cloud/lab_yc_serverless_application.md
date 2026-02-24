@@ -175,7 +175,9 @@ CMD ["/bin/sh", "-c", "envsubst '$$PORT' < /etc/nginx/templates/default.conf.tem
    - `apk` — менеджер пакетов Alpine Linux (аналог `apt`/`yum`);
    - `bash` — оболочка, из которой запускаем `envsubst`;
    - `gettext` — пакет, внутри которого находится утилита `envsubst`;
-   - `envsubst` заменяет `${PORT}` в шаблоне nginx на реальное значение порта.
+   - `envsubst` заменяет `${PORT}` в шаблоне nginx на реальное значение порта;
+   - значение `PORT` приходит из окружения платформы или берётся из `ENV PORT`
+     ниже, если его не передали.
 3. **COPY dist/** — переносим результат `trunk build` в каталог nginx
    `/usr/share/nginx/html`. Это стандартное место для статических файлов.
 4. **COPY nginx.conf.template** — кладём шаблон конфигурации nginx, в котором

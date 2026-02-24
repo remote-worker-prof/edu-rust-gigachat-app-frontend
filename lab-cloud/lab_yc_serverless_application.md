@@ -177,8 +177,8 @@ CMD ["/bin/sh", "-c", "envsubst '$$PORT' < /etc/nginx/templates/default.conf.tem
    требование контейнерной платформы: основной процесс не должен «уходить в фон».
 
 **Файлы в репозитории:**
-- `lab-cloud/Dockerfile` — полный учебный Dockerfile из примера выше.
-- `lab-cloud/nginx.conf.template` — шаблон конфигурации nginx.
+- `Dockerfile` — полный учебный Dockerfile из примера выше (в корне проекта).
+- `nginx.conf.template` — шаблон конфигурации nginx (в корне проекта).
 
 Пример `nginx.conf.template`:
 
